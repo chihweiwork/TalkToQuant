@@ -189,6 +189,16 @@ def _build_chart(result, benchmark_df, strategy_name, stock_id, date_range) -> s
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"backtest_{stock_id}_{timestamp}.html"
     filepath = os.path.join(REPORTS_DIR, filename)
-    fig.write_html(filepath)
+
+    # 使用 CDN 而非嵌入完整 Plotly.js，大幅減小檔案體積（4.7MB → ~100KB）
+    fig.write_html(
+        filepath,
+        include_plotlyjs='cdn',
+        config={
+            'displayModeBar': True,
+            'responsive': True,
+            'displaylogo': False,
+        }
+    )
 
     return os.path.abspath(filepath)
