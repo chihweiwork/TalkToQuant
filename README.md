@@ -191,16 +191,6 @@ print(f"總報酬：{result.stats['total_return']*100:.2f}%")
 
 ---
 
-## 📚 文檔
-
-- 📖 [完整功能清單](docs/FEATURES.md) - 8 大模組詳細說明
-- 💼 [投資組合回測指南](docs/PORTFOLIO_BACKTEST.md) - 多股票組合策略
-- 🎬 [Demo 腳本](docs/DEMO_SCRIPT.md) - 展示流程參考
-- 📊 [簡報內容](docs/PRESENTATION.md) - 專案介紹簡報
-- 🚀 [快速入門](docs/QUICK_START.md) - 5 分鐘上手指南
-
----
-
 ## 🌟 使用範例
 
 ### 範例 1：簡單均線策略
@@ -273,38 +263,6 @@ print(f"組合總報酬：{result.stats['total_return']*100:.2f}%")
 
 ---
 
-## 🤝 貢獻
-
-歡迎提交 Issue 和 Pull Request！
-
-### 開發指南
-1. Fork 本專案
-2. 建立功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交變更 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟 Pull Request
-
-### 擴充指標範例
-
-在 `backtest/indicators.py` 新增自訂指標：
-
-```python
-def add_bollinger_bands(df: pd.DataFrame, period: int = 20) -> pd.DataFrame:
-    df["bb_mid"] = df["close"].rolling(window=period).mean()
-    std = df["close"].rolling(window=period).std()
-    df["bb_upper"] = df["bb_mid"] + 2 * std
-    df["bb_lower"] = df["bb_mid"] - 2 * std
-    return df
-```
-
----
-
-## 📄 授權
-
-本專案採用 MIT 授權條款 - 詳見 [LICENSE](LICENSE) 檔案
-
----
-
 ## 👨‍💻 作者
 
 **chihwei** - [chihweiwork@gmail.com](mailto:chihweiwork@gmail.com)
@@ -321,23 +279,4 @@ def add_bollinger_bands(df: pd.DataFrame, period: int = 20) -> pd.DataFrame:
 
 ---
 
-## 📊 專案狀態
-
-- **版本**：v0.9 (Beta)
-- **完成度**：85-90%
-- **最後更新**：2026-06-27
-- **測試狀態**：✅ 已實測 11+ 次回測
-
----
-
-## 💡 未來規劃
-
-- [ ] 更多技術指標（布林通道、KD、ATR）
-- [ ] 參數優化功能（Grid Search）
-- [ ] 投資組合再平衡（月度/季度）
-- [ ] 風險平價權重計算
-- [ ] Web UI 介面
-
----
-
-**立即開始**：查看 [快速入門指南](docs/QUICK_START.md) 或執行 `/backtest` 開始您的第一次回測！
+**立即開始**：執行 `/backtest` 開始您的第一次回測！
