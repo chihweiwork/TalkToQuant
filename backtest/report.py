@@ -17,7 +17,23 @@ def generate_report(
 ) -> tuple:
     summary = _build_summary(result, benchmark_df, strategy_name, stock_id, date_range)
     html_path = _build_chart(result, benchmark_df, strategy_name, stock_id, date_range)
-    return summary, html_path
+
+    # 產生 Tailscale HTTP URL
+    import subprocess
+    try:
+        tailscale_ip = subprocess.check_output(
+            ["tailscale", "ip", "-4"],
+            stderr=subprocess.DEVNULL
+        ).decode().strip()
+    except:
+        tailscale_ip = "100.95.111.123"  # Fallback to default
+
+    # 取得相對路徑
+    project_root = os.path.dirname(os.path.dirname(__file__))
+    relative_path = os.path.relpath(html_path, project_root)
+    http_url = f"http://{tailscale_ip}:8888/{relative_path}"
+
+    return summary, html_path, http_url
 
 
 def _build_summary(result, benchmark_df, strategy_name, stock_id, date_range) -> str:

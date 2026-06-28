@@ -176,7 +176,7 @@ result = run_backtest(df, signal_column="signal", initial_capital=1_000_000)
 
 # Step 6: Generate report
 strategy_name = "台積電(2330) 5MA / 20MA 均線交叉策略"
-summary, html_path = generate_report(
+summary, html_path, http_url = generate_report(
     result, benchmark_df,
     strategy_name=strategy_name,
     stock_id=stock_id,
@@ -184,7 +184,9 @@ summary, html_path = generate_report(
 )
 
 print(summary)
-print(f"🖼️ 互動式圖表已生成：\n   👉 file://{html_path}")
+print(f"互動式圖表已生成：")
+print(f"  本地檔案：file://{html_path}")
+print(f"  網頁瀏覽：{http_url}")
 print()
 print("=" * 50)
 print('[系統提示] 您可以繼續輸入 "幫我把均線參數改成 10日和 60日再跑一次" 來優化策略。')
@@ -265,7 +267,12 @@ start_date = (datetime.now() - timedelta(days=365*2)).strftime("%Y-%m-%d")
 
 ## Output Format
 
-Always print the summary text returned by `generate_report()`, followed by the HTML file path. The summary is pre-formatted — print it directly without modification.
+Always print the summary text returned by `generate_report()`, followed by both the local file path and HTTP URL. The summary is pre-formatted — print it directly without modification.
+
+`generate_report()` returns three values:
+- `summary`: Formatted text report
+- `html_path`: Local file path
+- `http_url`: Tailscale HTTP URL for browser access
 
 ## Important Notes
 
